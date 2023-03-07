@@ -36,6 +36,16 @@ dependencies {
     //JACKSON FOR DOCUMENT
     implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
+
+    //SPRING FOR DATABASE
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
+    implementation("org.mariadb.jdbc:mariadb-java-client:2.7.2")
+    implementation("org.springframework.boot:spring-boot-starter-cache:2.7.2")
+    implementation("org.hibernate:hibernate-core:5.6.5.Final")
+    implementation("org.hibernate:hibernate-envers:5.6.5.Final")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    compileOnly("commons-io:commons-io:2.11.0")
 }
 
 tasks {

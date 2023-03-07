@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - src/main/resources/.env
+    depends_on:
+      - mariadb
+    restart: always
+  mariadb:
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: root
+      MARIADB_TCP_PORT: 3307
+    image: mariadb
+    restart: always
+volumes:
+  mariadb-data: {}

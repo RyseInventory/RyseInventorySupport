@@ -1,1 +1,1 @@
-Main-Class: io.github.rysefoxx.inventory.bot.MainKt
+Main-Class: io.github.rysefoxx.inventory.bot.BootstrapKt
