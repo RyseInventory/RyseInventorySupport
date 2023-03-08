@@ -13,7 +13,7 @@ class UserEntity constructor(
     var id: Long? = null,
 
     @Column(nullable = false)
-    var language: String = "en"
+    var language: String = "english"
 ) {
     constructor() : this(id = null)
 }

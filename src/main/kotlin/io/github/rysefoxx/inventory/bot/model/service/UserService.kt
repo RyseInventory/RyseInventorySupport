@@ -11,6 +11,15 @@ class UserService(
     @Autowired
     private val userRepository: UserRepository
 ) {
+
+    fun getUserById(id: Long): UserEntity {
+        return userRepository.findById(id).orElseGet {
+            val user = UserEntity(id)
+            saveUser(user)
+            user
+        }
+    }
+
     fun saveUser(userEntity: UserEntity) {
         Logger.info("Saving user: ${userEntity.id}")
         userRepository.save(userEntity)

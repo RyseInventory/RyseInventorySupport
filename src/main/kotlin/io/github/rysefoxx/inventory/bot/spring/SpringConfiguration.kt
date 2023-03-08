@@ -1,8 +1,6 @@
 package io.github.rysefoxx.inventory.bot.spring
 
-import io.github.rysefoxx.inventory.bot.Bootstrap
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy

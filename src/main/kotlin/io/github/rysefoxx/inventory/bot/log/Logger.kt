@@ -1,7 +1,6 @@
 package io.github.rysefoxx.inventory.bot.log
 
 import org.slf4j.LoggerFactory
-import java.lang.Exception
 
 object Logger {
     private val log: org.slf4j.Logger = LoggerFactory.getLogger(Logger::class.java)

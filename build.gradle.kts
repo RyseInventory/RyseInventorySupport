@@ -33,10 +33,6 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
     implementation("ch.qos.logback:logback-classic:1.2.9")
 
-    //JACKSON FOR DOCUMENT
-    implementation("com.fasterxml.jackson.core:jackson-core:2.13.3")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3")
-
     //SPRING FOR DATABASE
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
     implementation("org.mariadb.jdbc:mariadb-java-client:2.7.2")
@@ -44,15 +40,16 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.6.5.Final")
     implementation("org.hibernate:hibernate-envers:5.6.5.Final")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.yaml:snakeyaml:1.29")
 
-    compileOnly("commons-io:commons-io:2.11.0")
+    implementation("commons-io:commons-io:2.11.0")
 }
 
 tasks {
     jar {
         manifest {
             attributes(
-                "Main-Class" to "io.github.rysefoxx.inventory.bot.MainKt"
+                "Main-Class" to "io.github.rysefoxx.inventory.bot.BootstrapKt"
             )
         }
     }

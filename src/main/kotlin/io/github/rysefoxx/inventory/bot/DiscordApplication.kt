@@ -1,7 +1,6 @@
-package io.github.rysefoxx.inventory.bot.spring
+package io.github.rysefoxx.inventory.bot
 
 import dev.minn.jda.ktx.jdabuilder.default
-import io.github.rysefoxx.inventory.bot.Bootstrap
 import io.github.rysefoxx.inventory.bot.document.EnvironmentHolder
 import io.github.rysefoxx.inventory.bot.log.Logger
 import io.github.rysefoxx.inventory.bot.spring.event.BootstrapReadyEvent
@@ -21,7 +20,7 @@ class DiscordApplication {
     @Order(2)
     fun start() {
         Logger.info("Starting RyseInventory Bot.")
-        val jda = default(EnvironmentHolder.data.getProperty("TOKEN") ?: "") {
+        val jda = default(EnvironmentHolder.data.getProperty("TOKEN")) {
             setActivity(Activity.watching("RyseInventory Source Code"))
             setStatus(OnlineStatus.ONLINE)
             enableIntents(GatewayIntent.GUILD_MEMBERS)
