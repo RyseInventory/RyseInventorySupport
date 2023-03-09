@@ -4,17 +4,5 @@ TicketSystem
  2.1) Hat das Ticket nicht die relevanten Daten, wird es abgelehnt und zurück an den Spieler geschickt mit dem Grund.
  3) Passt alles, wird das Ticket einem Teammitglied zugewiesen und bearbeitet.
 
-Bug-Report System
- 1) Ein Spieler kann einen Bug-Report erstellen
- 2) Dieser Bug-Report landet beim Team. Sollte das Bug-Report nicht die relevanten Daten haben, wird es abgelehnt und zurück an den Spieler geschickt mit dem Grund.
- 3) Anschließend wird der Bug-Report von einem Entwickler bearbeitet. Sollte der Entwickler mehr Informationen benötigen, kann der Entwickler den Bug-Report Public stellen.
- 3.1) Die Spieler können nun den Bug-Report sehen und das Problem nachstellen und weitere Informationen liefern.
- 4) Ist das Problem immer noch nicht reproduzierbar, wird der Bug-Report geschlossen und der Spieler wird über den Status informiert.
- 5) Ist das Problem reproduzierbar, erhält der Spieler weitere Informationen.
- 6) Der Bug-Report wird geschlossen, wenn das Problem behoben ist.
-
-Idea System
-...
-
-Voting System
+TagSystem
 ...
