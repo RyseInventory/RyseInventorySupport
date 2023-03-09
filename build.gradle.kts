@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -6,50 +7,50 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
-group = "io.github.rysefoxx.inventory.bot"
-version = "0.1-alpha"
+group = "io.github.rysefoxx.inventory.bot.parent"
 archivesName.set("Supportbot")
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+subprojects {
+    apply(plugin = "kotlin")
+    apply(plugin = "com.github.johnrengelman.shadow")
+
+    tasks.withType<ShadowJar> {
+        mergeServiceFiles()
+    }
 }
 
-tasks.withType<KotlinCompile>{
-    kotlinOptions.jvmTarget = "17"
-}
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 
-repositories {
-    mavenCentral()
-    maven("https://jitpack.io/")
+    version = "0.1-alpha"
+
+    tasks {
+        compileJava {
+            options.encoding = "UTF-8"
+            options.release.set(17)
+        }
+        compileKotlin {
+            kotlinOptions.jvmTarget = "17"
+        }
+    }
 }
 
 dependencies {
-    //JDA
-    implementation("net.dv8tion:JDA:5.0.0-beta.5")
-    implementation("com.github.minndevelopment:jda-ktx:0.10.0-beta.1")
-
-    //LOGGING
-    implementation("org.slf4j:slf4j-api:1.7.32")
-    implementation("ch.qos.logback:logback-classic:1.2.9")
-
-    //SPRING FOR DATABASE
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
-    implementation("org.mariadb.jdbc:mariadb-java-client:2.7.2")
-    implementation("org.springframework.boot:spring-boot-starter-cache:2.7.2")
-    implementation("org.hibernate:hibernate-core:5.6.5.Final")
-    implementation("org.hibernate:hibernate-envers:5.6.5.Final")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.yaml:snakeyaml:1.29")
-
-    implementation("commons-io:commons-io:2.11.0")
+    implementation(project(":core"))
+    implementation(project(":logger"))
+    implementation(project(":spring:core"))
+    implementation(project(":spring:event"))
+    implementation(project(":tag"))
+    implementation(project(":ticket"))
 }
 
 tasks {
     jar {
         manifest {
             attributes(
-                "Main-Class" to "io.github.rysefoxx.inventory.bot.BootstrapKt"
+                "Main-Class" to "io.github.rysefoxx.inventory.bot.core.BootstrapKt"
             )
         }
     }

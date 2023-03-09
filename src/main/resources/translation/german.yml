@@ -1,8 +1,0 @@
-rule_disagree: "Du akzeptierst nicht länger die Regeln. Um die Channel wieder betreten zu können, musst du die Regeln akzeptieren."
-rule_agree: "Du hast die Regeln akzeptiert. Willkommen!"
-rule_already_agreed: "Du hast die Regeln bereits akzeptiert."
-rule_not_agreed: "Du hast die Regeln noch nicht akzeptiert."
-language_select: "Deine Übersetzungen erfolgen nun in der Sprache: {PH}"
-role_not_selected: "Du hast die Rolle {PH} noch nicht ausgewählt."
-role_apply: "Du hast die Rolle {PH} ausgewählt."
-role_remove: "Du hast die Rolle {PH} entfernt."

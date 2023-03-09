@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - src/main/resources/.env
+      - core/src/main/resources/.env
     depends_on:
       - mariadb
     restart: always
