@@ -1,6 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.8.0"
@@ -42,8 +41,10 @@ dependencies {
     implementation(project(":logger"))
     implementation(project(":spring:core"))
     implementation(project(":spring:event"))
+    implementation(project(":command-bridge"))
     implementation(project(":tag"))
     implementation(project(":ticket"))
+    implementation(project(":punishment"))
 }
 
 tasks {

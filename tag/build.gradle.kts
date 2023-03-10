@@ -10,4 +10,6 @@ repositories {
 dependencies {
     compileOnly("net.dv8tion:JDA:5.0.0-beta.5")
     compileOnly("com.github.minndevelopment:jda-ktx:0.10.0-beta.1")
+
+    compileOnly(project(":command-bridge"))
 }

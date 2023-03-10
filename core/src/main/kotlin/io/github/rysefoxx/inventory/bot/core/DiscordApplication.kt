@@ -1,10 +1,11 @@
 package io.github.rysefoxx.inventory.bot.core
 
 import dev.minn.jda.ktx.jdabuilder.default
-import io.github.rysefoxx.inventory.bot.core.document.EnvironmentHolder
-import io.github.rysefoxx.inventory.bot.logger.Logger
 import io.github.rysefoxx.inventory.bot.core.spring.event.BootstrapReadyEvent
 import io.github.rysefoxx.inventory.bot.core.spring.event.DiscordApplicationReadyEvent
+import io.github.rysefoxx.inventory.bot.document.EnvironmentHolder
+import io.github.rysefoxx.inventory.bot.logger.Logger
+import io.github.rysefoxx.inventory.bot.spring.core.Application
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -30,6 +31,6 @@ class DiscordApplication {
         Logger.info("RyseInventory Bot started.")
 
         Logger.info("Publishing event DiscordApplicationReadyEvent.")
-        Bootstrap.context.publishEvent(DiscordApplicationReadyEvent())
+        Application.context.publishEvent(DiscordApplicationReadyEvent())
     }
 }

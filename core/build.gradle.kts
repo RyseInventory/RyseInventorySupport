@@ -19,6 +19,21 @@ dependencies {
     implementation(project(":spring:core"))
     implementation(project(":spring:event"))
 
+    //COMMAND-BRIDGE
+    implementation(project(":command-bridge"))
+
+    //PUNISHMENT SYSTEM
+    implementation(project(":punishment"))
+
+    //CLASS EXTENSION
+    implementation(project(":extension"))
+
+    //DOCUMENTS
+    implementation(project(":document"))
+
+    //CLASS EXTENSION
+    implementation(project(":spring:model"))
+
     //SPRING FOR DATABASE
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
     implementation("org.mariadb.jdbc:mariadb-java-client:2.7.2")
@@ -26,5 +41,7 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.6.5.Final")
     implementation("org.hibernate:hibernate-envers:5.6.5.Final")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    //YML
     implementation("org.yaml:snakeyaml:1.29")
 }

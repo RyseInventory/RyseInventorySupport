@@ -18,4 +18,4 @@ services:
     image: mariadb
     restart: always
 volumes:
-  mariadb-data: {}
+  mariadb-data: { }

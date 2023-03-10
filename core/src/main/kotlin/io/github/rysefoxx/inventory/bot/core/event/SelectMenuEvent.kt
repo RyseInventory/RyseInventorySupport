@@ -1,11 +1,10 @@
 package io.github.rysefoxx.inventory.bot.core.event
 
-import io.github.rysefoxx.inventory.bot.core.document.EnvironmentHolder
-import io.github.rysefoxx.inventory.bot.core.extension.replyTranslatedAndQueue
-import io.github.rysefoxx.inventory.bot.core.model.service.UserService
-import io.github.rysefoxx.inventory.bot.core.role.RoleManager
-import io.github.rysefoxx.inventory.bot.core.util.StringConstants
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
+import io.github.rysefoxx.inveneetory.bot.command.StringConstants
+import io.github.rysefoxx.inventory.bot.core.manager.RoleManager
+import io.github.rysefoxx.inventory.bot.document.EnvironmentHolder
+import io.github.rysefoxx.inventory.bot.document.LanguageDocument
+import io.github.rysefoxx.inventory.bot.spring.model.service.UserService
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,14 +15,17 @@ import java.util.*
 class SelectMenuEvent(
 
     @Autowired
-    private val userService: UserService
+    private val userService: UserService,
+
+    @Autowired
+    private val languageDocument: LanguageDocument
 
 ) : ListenerAdapter() {
 
     override fun onStringSelectInteraction(event: StringSelectInteractionEvent) {
         when (event.componentId) {
             StringConstants.SELECT_MENU_LANGUAGE -> {
-                if(event.values[0].equals(StringConstants.SELECT_MENU_OPTION_LANGUAGE)) {
+                if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_LANGUAGE)) {
                     return
                 }
 
@@ -31,11 +33,13 @@ class SelectMenuEvent(
                 user.language = event.values[0].split("-")[1]
                 userService.saveUser(user)
 
-                event.replyTranslatedAndQueue("language_select", user.language)
+                event.reply(languageDocument.getTranslation("language_select", event.user.idLong, user.language))
+                    .setEphemeral(true)
+                    .queue()
             }
 
             StringConstants.SELECT_MENU_RULES -> {
-                if(event.values[0].equals(StringConstants.SELECT_MENU_OPTION_RULES)) {
+                if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_RULES)) {
                     return
                 }
 
@@ -43,24 +47,32 @@ class SelectMenuEvent(
                 val role = RoleManager.getRoleById(EnvironmentHolder.data.getProperty("RULES_ACCEPTED_ID"))
 
                 if (value == StringConstants.SELECT_MENU_RULES_AGREE && role != null) {
-                    if(event.member?.roles?.contains(role) == true) {
-                        event.replyTranslatedAndQueue("rule_already_agreed")
+                    if (event.member?.roles?.contains(role) == true) {
+                        event.reply(languageDocument.getTranslation("rule_already_agreed", event.user.idLong))
+                            .setEphemeral(true)
+                            .queue()
                         return
                     }
                     event.guild?.addRoleToMember(event.user, role)?.queue()
-                    event.replyTranslatedAndQueue("rule_agree")
+                    event.reply(languageDocument.getTranslation("rule_agree", event.user.idLong))
+                        .setEphemeral(true)
+                        .queue()
                 } else if (value == StringConstants.SELECT_MENU_RULES_DISAGREE && role != null) {
-                    if(event.member?.roles?.contains(role) == false) {
-                        event.replyTranslatedAndQueue("rule_not_agreed")
+                    if (event.member?.roles?.contains(role) == false) {
+                        event.reply(languageDocument.getTranslation("rule_not_agreed", event.user.idLong))
+                            .setEphemeral(true)
+                            .queue()
                         return
                     }
                     event.guild?.removeRoleFromMember(event.user, role)?.queue()
-                    event.replyTranslatedAndQueue("rule_disagree")
+                    event.reply(languageDocument.getTranslation("rule_disagree", event.user.idLong))
+                        .setEphemeral(true)
+                        .queue()
                 }
             }
 
             StringConstants.SELECT_MENU_ROLE -> {
-                if(event.values[0].equals(StringConstants.SELECT_MENU_OPTION_ROLE)) {
+                if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_ROLE)) {
                     return
                 }
 
@@ -72,13 +84,17 @@ class SelectMenuEvent(
                 val role = RoleManager.getRoleByName(roleName)
 
                 if (role != null) {
-                    if(event.member?.roles?.contains(role) == true) {
+                    if (event.member?.roles?.contains(role) == true) {
                         event.guild?.removeRoleFromMember(event.user, role)?.queue()
-                        event.replyTranslatedAndQueue("role_remove", roleName)
+                        event.reply(languageDocument.getTranslation("role_remove", event.user.idLong, roleName))
+                            .setEphemeral(true)
+                            .queue()
                         return
                     }
                     event.guild?.addRoleToMember(event.user, role)?.queue()
-                    event.replyTranslatedAndQueue("role_apply", roleName)
+                    event.reply(languageDocument.getTranslation("role_apply", event.user.idLong, roleName))
+                        .setEphemeral(true)
+                        .queue()
                 }
             }
         }

@@ -1,7 +1,11 @@
 package io.github.rysefoxx.inventory.bot.spring.core
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.context.ConfigurableApplicationContext
 
-@SpringBootApplication(scanBasePackages = ["io.github.rysefoxx.inventory.bot"])
+@SpringBootApplication
 open class Application {
+    companion object {
+        lateinit var context: ConfigurableApplicationContext
+    }
 }

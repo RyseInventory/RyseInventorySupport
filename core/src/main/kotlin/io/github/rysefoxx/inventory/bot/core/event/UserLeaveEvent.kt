@@ -1,7 +1,7 @@
 package io.github.rysefoxx.inventory.bot.core.event
 
 import io.github.rysefoxx.inventory.bot.logger.Logger
-import io.github.rysefoxx.inventory.bot.core.model.service.UserService
+import io.github.rysefoxx.inventory.bot.spring.model.service.UserService
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import org.springframework.beans.factory.annotation.Autowired
