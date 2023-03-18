@@ -127,6 +127,8 @@ tags_in_progress: "You are currently creating a tag. Cancel the process to creat
 tags_created: "You have successfully created the tag {0}."
 tags_deleted: "You have successfully deleted the tag {0}."
 tags_declined: "You have successfully rejected the {0} tag."
+tags_list: "All tags: {0}"
+tags_list_empty: "There are no tags yet."
 tags_empty_content: "The content of a tag must not be empty."
 tags_embed_button_create_label: "Create"
 tags_embed_button_suggest_label: "Suggest"

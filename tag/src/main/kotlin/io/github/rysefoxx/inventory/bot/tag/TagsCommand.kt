@@ -68,6 +68,7 @@ class TagsCommand(
     companion object {
         const val TAGS_CREATE = "create"
         const val TAGS_DELETE = "delete"
+        const val TAGS_LIST = "list"
         const val TAGS_INFO = "info"
 
         const val TAGS_OPTION_NAME = "tag-name"
@@ -81,15 +82,22 @@ class TagsCommand(
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
-        val tagName = event.getOption(TAGS_OPTION_NAME)?.asString ?: return
+        val tagName = event.getOption(TAGS_OPTION_NAME)?.asString
+
+        if (tagName == null && event.subcommandName != TAGS_LIST)
+            return
 
         when (event.subcommandName) {
             TAGS_CREATE -> {
-                createTag(event, tagName)
+                createTag(event, tagName!!)
             }
 
             TAGS_DELETE -> {
-                deleteTag(event, tagName)
+                deleteTag(event, tagName!!)
+            }
+
+            TAGS_LIST -> {
+                listTags(event)
             }
         }
     }
@@ -103,12 +111,33 @@ class TagsCommand(
         val allTags = tagService.findAll()
 
         if (value.isEmpty()) {
-            return event.replyChoiceStrings(allTags.map { it.name }.subList(0, if (allTags.size < 25) allTags.size else 25)).queue()
+            return event.replyChoiceStrings(allTags.map { it.name }
+                .subList(0, if (allTags.size < 25) allTags.size else 25)).queue()
         }
 
         val list = allTags.map { it.name }.filter { it?.startsWith(value) ?: false }
 
         event.replyChoiceStrings(list.subList(0, list.size)).queue()
+    }
+
+    private fun listTags(event: SlashCommandInteractionEvent) {
+        val userId = event.user.idLong
+
+        val allTags = tagService.findAll()
+
+        if (allTags.isEmpty()) {
+            return event.reply(languageDocument.getTranslation("tags_list_empty", userId))
+                .setEphemeral(true).queue()
+        }
+
+        val tagNames = StringBuilder()
+        allTags.forEach { tagEntity ->
+            tagNames.append("`").append("${tagEntity.name}`").append(", ")
+        }
+        val result = tagNames.dropLast(2).toString()
+
+        event.reply(languageDocument.getTranslation("tags_list", userId, result))
+            .setEphemeral(true).queue()
     }
 
     private fun deleteTag(event: SlashCommandInteractionEvent, tagName: String) {
@@ -232,7 +261,8 @@ class TagsCommand(
             },
             SubcommandData(TAGS_DELETE, "Deletes a tag").apply {
                 addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true, true)
-            }
+            },
+            SubcommandData(TAGS_LIST, "Lists all tags")
         )
     }
 }

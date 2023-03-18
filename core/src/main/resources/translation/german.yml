@@ -127,6 +127,8 @@ tags_in_progress: "Du erstellst derzeit einen Tag. Brich den Vorgang ab, um eine
 tags_created: "Du hast den Tag {0} erfolgreich erstellt."
 tags_deleted: "Du hast den Tag {0} erfolgreich gelöscht."
 tags_declined: "Du hast den Tag {0} erfolgreich abgelehnt."
+tags_list: "Alle Tags: {0}"
+tags_list_empty: "Es existieren noch keine Tags."
 tags_empty_content: "Der Inhalt eines Tags darf nicht leer sein."
 tags_embed_button_create_label: "Erstellen"
 tags_embed_button_suggest_label: "Vorschlagen"
