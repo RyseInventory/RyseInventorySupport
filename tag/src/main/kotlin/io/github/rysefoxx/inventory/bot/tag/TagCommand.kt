@@ -30,6 +30,7 @@ import io.github.rysefoxx.inventory.bot.spring.model.entity.EmbedDataEntity
 import io.github.rysefoxx.inventory.bot.spring.model.service.EmbedDataService
 import io.github.rysefoxx.inventory.bot.spring.model.service.PunishmentService
 import io.github.rysefoxx.inventory.bot.spring.model.service.TagService
+import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
@@ -100,5 +101,22 @@ class TagCommand(
                 .setEphemeral(true).queue()
 
         event.reply(tagContent).queue()
+    }
+
+    override fun onAutoCompleteInteraction(event: CommandAutoCompleteInteractionEvent) {
+        val focusedOption = event.focusedOption.name
+        val value = event.focusedOption.value
+
+        if (focusedOption != TAGS_OPTION_NAME || event.name != name) return
+
+        val allTags = tagService.findAll()
+
+        if (value.isEmpty()) {
+            return event.replyChoiceStrings(allTags.map { it.name }.subList(0, if (allTags.size < 25) allTags.size else 25)).queue()
+        }
+
+        val list = allTags.map { it.name }.filter { it?.startsWith(value) ?: false }
+
+        event.replyChoiceStrings(list.subList(0, list.size)).queue()
     }
 }

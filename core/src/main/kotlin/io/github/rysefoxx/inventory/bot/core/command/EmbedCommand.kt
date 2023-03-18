@@ -100,7 +100,7 @@ class EmbedCommand(
         if (focusedOption != EMBED_NAME_OPTION_NAME || event.name != name)
             return
 
-        event.replyChoiceStrings(words.filter { it.startsWith(focusedOption) }).queue()
+        event.replyChoiceStrings(words.filter { it.startsWith(event.focusedOption.value) }).queue()
     }
 
     private fun languageSelection(): StringSelectMenu {

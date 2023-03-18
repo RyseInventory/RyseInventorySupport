@@ -157,6 +157,6 @@ class PunishmentCommand(
         if (focusedOption != SYSTEM_OPTION_NAME || event.name != name)
             return
 
-        event.replyChoiceStrings(systems.filter { it.startsWith(focusedOption) }).queue()
+        event.replyChoiceStrings(systems.filter { it.startsWith(event.focusedOption.value) }).queue()
     }
 }

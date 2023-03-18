@@ -32,6 +32,7 @@ import io.github.rysefoxx.inventory.bot.spring.model.service.EmbedDataService
 import io.github.rysefoxx.inventory.bot.spring.model.service.PunishmentService
 import io.github.rysefoxx.inventory.bot.spring.model.service.TagService
 import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.events.interaction.command.CommandAutoCompleteInteractionEvent
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.InteractionHook
 import net.dv8tion.jda.api.interactions.commands.OptionType
@@ -93,11 +94,28 @@ class TagsCommand(
         }
     }
 
+    override fun onAutoCompleteInteraction(event: CommandAutoCompleteInteractionEvent) {
+        val focusedOption = event.focusedOption.name
+        val value = event.focusedOption.value
+
+        if (focusedOption != TAGS_OPTION_NAME || event.subcommandName != TAGS_DELETE) return
+
+        val allTags = tagService.findAll()
+
+        if (value.isEmpty()) {
+            return event.replyChoiceStrings(allTags.map { it.name }.subList(0, if (allTags.size < 25) allTags.size else 25)).queue()
+        }
+
+        val list = allTags.map { it.name }.filter { it?.startsWith(value) ?: false }
+
+        event.replyChoiceStrings(list.subList(0, list.size)).queue()
+    }
+
     private fun deleteTag(event: SlashCommandInteractionEvent, tagName: String) {
         val userId = event.user.idLong
         val hasPermission = event.member?.hasPermission(Permission.ADMINISTRATOR) ?: false
 
-        if(!hasPermission) {
+        if (!hasPermission) {
             return event.reply(languageDocument.getTranslation("tags_delete_no_permission", userId))
                 .setEphemeral(true).queue()
         }
@@ -210,10 +228,10 @@ class TagsCommand(
     private fun subCommands(): List<SubcommandData> {
         return listOf(
             SubcommandData(TAGS_CREATE, "Creates a new tag.").apply {
-                addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true)
+                addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true, false)
             },
             SubcommandData(TAGS_DELETE, "Deletes a tag").apply {
-                addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true)
+                addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true, true)
             }
         )
     }

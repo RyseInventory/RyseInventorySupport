@@ -43,6 +43,10 @@ class TagService(
     private val tagRequestRepository: TagRequestRepository
 ) {
 
+    fun findAll(): List<TagEntity> {
+        return tagRepository.findAll()
+    }
+
     fun exists(name: String): Boolean {
         return tagRepository.existsById(name)
     }
