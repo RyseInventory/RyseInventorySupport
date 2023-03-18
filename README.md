@@ -13,6 +13,7 @@ in a public chat for voting.
 - A ticket system
 - A report system
 - A tag system
+- A ban system
 
 # Found an issue?
 
