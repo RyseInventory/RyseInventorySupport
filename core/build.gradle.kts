@@ -25,6 +25,9 @@ dependencies {
     //PUNISHMENT SYSTEM
     implementation(project(":punishment"))
 
+    //TAG SYSTEM
+    implementation(project(":tag"))
+
     //CLASS EXTENSION
     implementation(project(":extension"))
 

@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands
 import net.dv8tion.jda.api.interactions.components.buttons.Button
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class PunishmentCommand(
@@ -103,7 +102,7 @@ class PunishmentCommand(
                 .setEphemeral(true)
                 .queue()
 
-        val placeHolder = listOf(user.asMention, event.user.asMention, reason, system, time.toString())
+        val placeHolder = listOf(user.asMention, event.user.id, reason, system, time.toString())
 
         var embedData = EmbedDataEntity(data = placeHolder)
         embedData = embedDataService.saveData(embedData)
@@ -125,7 +124,7 @@ class PunishmentCommand(
         ChannelUtil.embed(
             name, EnvironmentHolder.data.getProperty("BAN_LOG_ID"), event.jda, placeHolder, embedData.id.toString()
         )?.addActionRow(
-            Button.secondary("${UUID.randomUUID()}_${StringConstants.EMBED_TRANSLATE_BUTTON}", "Translate")
+            Button.secondary(StringConstants.EMBED_TRANSLATE_BUTTON, languageDocument.getDefaultTranslation("translate_button_label"))
         )?.queue()
 
     }

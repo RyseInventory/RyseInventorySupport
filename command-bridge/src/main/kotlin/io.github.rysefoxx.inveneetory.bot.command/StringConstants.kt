@@ -19,4 +19,19 @@ object StringConstants {
 
     const val EMBED_TRANSLATE_BUTTON = "translate-button"
 
+    const val BUTTON_TAG_SUGGEST = "tag-button-request"
+    const val BUTTON_TAG_CREATE = "tag-button-create"
+    const val BUTTON_TAG_CONTENT = "tag-button-content"
+    const val BUTTON_TAG_ALIAS = "tag-button-alias"
+    const val BUTTON_TAG_ABORT = "tag-button-abort"
+
+    const val BUTTON_TAG_REQUEST_ACCEPT = "tag-button-request-accept"
+    const val BUTTON_TAG_REQUEST_DENY = "tag-button-request-deny"
+
+    const val TEXT_TAG_CONTENT = "tag-text-content"
+    const val TEXT_TAG_ALIAS = "tag-text-alias"
+
+    const val MODAL_TAG_CONTENT = "tag-modal-content"
+    const val MODAL_TAG_ALIAS = "tag-modal-alias"
+
 }

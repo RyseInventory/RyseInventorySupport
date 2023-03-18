@@ -40,12 +40,12 @@ object SlashCommandManager : ListenerAdapter() {
     }
 
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
-        val command = commands[event.fullCommandName] ?: return
+        val command = commands[event.fullCommandName.split(" ")[0]] ?: return
         command.onSlashCommandInteraction(event)
     }
 
     override fun onCommandAutoCompleteInteraction(event: CommandAutoCompleteInteractionEvent) {
-        val command = commands[event.fullCommandName] ?: return
+        val command = commands[event.fullCommandName.split(" ")[0]] ?: return
         command.onAutoCompleteInteraction(event)
     }
 }

@@ -3,6 +3,7 @@ package io.github.rysefoxx.inventory.bot.core.command
 import dev.minn.jda.ktx.interactions.components.StringSelectMenu
 import io.github.rysefoxx.inveneetory.bot.command.SlashCommand
 import io.github.rysefoxx.inveneetory.bot.command.StringConstants
+import io.github.rysefoxx.inventory.bot.document.EnvironmentHolder
 import io.github.rysefoxx.inventory.bot.document.LanguageDocument
 import io.github.rysefoxx.inventory.bot.extension.ChannelUtil
 import net.dv8tion.jda.api.Permission
@@ -18,7 +19,6 @@ import net.dv8tion.jda.api.interactions.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.*
 
 @Component
 class EmbedCommand(
@@ -52,7 +52,13 @@ class EmbedCommand(
     override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
         val option = event.getOption(EMBED_NAME_OPTION_NAME) ?: return
 
-        event.replyEmbeds(ChannelUtil.embed(option.asString.lowercase()))
+        val placeHolder = mutableListOf<String>()
+
+        if(option.asString.lowercase() == "rules") {
+            placeHolder.add(EnvironmentHolder.data.getProperty("REPORT_ID"))
+        }
+
+        event.replyEmbeds(ChannelUtil.embed(option.asString.lowercase(), placeHolders = placeHolder))
             .addActionRow(
                 when (option.asString.lowercase()) {
                     "rules" -> rulesSelection()
@@ -62,7 +68,7 @@ class EmbedCommand(
                 }
             )
             .addActionRow(
-                Button.secondary("${UUID.randomUUID()}_${StringConstants.EMBED_TRANSLATE_BUTTON}", "Translate")
+                Button.secondary(StringConstants.EMBED_TRANSLATE_BUTTON, languageDocument.getDefaultTranslation("translate_button_label"))
             )
             .queue()
     }

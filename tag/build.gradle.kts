@@ -12,4 +12,8 @@ dependencies {
     compileOnly("com.github.minndevelopment:jda-ktx:0.10.0-beta.1")
 
     compileOnly(project(":command-bridge"))
+    compileOnly(project(":document"))
+    compileOnly(project(":extension"))
+    compileOnly(project(mapOf("path" to ":spring:model")))
+    compileOnly("org.springframework.boot:spring-boot-starter-data-jpa:2.7.2")
 }

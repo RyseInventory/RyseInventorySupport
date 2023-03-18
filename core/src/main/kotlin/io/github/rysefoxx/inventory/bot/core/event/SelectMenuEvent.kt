@@ -26,6 +26,7 @@ class SelectMenuEvent(
         when (event.componentId) {
             StringConstants.SELECT_MENU_LANGUAGE -> {
                 if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_LANGUAGE)) {
+                    event.deferEdit().queue()
                     return
                 }
 
@@ -40,6 +41,7 @@ class SelectMenuEvent(
 
             StringConstants.SELECT_MENU_RULES -> {
                 if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_RULES)) {
+                    event.deferEdit().queue()
                     return
                 }
 
@@ -73,6 +75,7 @@ class SelectMenuEvent(
 
             StringConstants.SELECT_MENU_ROLE -> {
                 if (event.values[0].equals(StringConstants.SELECT_MENU_OPTION_ROLE)) {
+                    event.deferEdit().queue()
                     return
                 }
 

@@ -39,8 +39,11 @@ class LanguageDocument(
 
     fun getTranslation(key: String, userId: Long?, placeHolder: List<String?>? = null): String {
         val userLanguage = userId?.let { userService.getUserById(it).language } ?: return key
-
-        var value = loadTranslations("$userLanguage.yml")?.get(key) as? String ?: key
+        var value = when (val translation = loadTranslations("${userLanguage}.yml")?.get(key)) {
+            is String -> translation
+            is List<*> -> translation.joinToString("\n") { it.toString() }
+            else -> key
+        }
 
         placeHolder?.forEachIndexed() { index, ph ->
             value = ph?.let { value.replaceFirst("{$index}", it) } ?: value
@@ -52,6 +55,7 @@ class LanguageDocument(
     fun getTranslation(key: String, userId: Long?, placeHolder: String? = null): String {
         return getTranslation(key, userId, listOf(placeHolder))
     }
+
     fun getTranslation(key: String, userId: Long?): String {
         return getTranslation(key, userId, listOf(null))
     }
@@ -78,7 +82,11 @@ class LanguageDocument(
     }
 
     fun getDefaultTranslation(key: String): String {
-        return loadTranslations("english.yml")?.get(key) as? String ?: key
+        return when (val translation = loadTranslations("english.yml")?.get(key)) {
+            is String -> translation
+            is List<*> -> translation.joinToString("\n") { it.toString() }
+            else -> key
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

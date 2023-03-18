@@ -24,7 +24,7 @@ class DiscordApplication {
         val jda = default(EnvironmentHolder.data.getProperty("TOKEN")) {
             setActivity(Activity.watching("RyseInventory Source Code"))
             setStatus(OnlineStatus.ONLINE)
-            enableIntents(GatewayIntent.GUILD_MEMBERS)
+            enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT)
             setMemberCachePolicy(MemberCachePolicy.ALL)
         }.awaitReady()
         Bootstrap.jda = jda

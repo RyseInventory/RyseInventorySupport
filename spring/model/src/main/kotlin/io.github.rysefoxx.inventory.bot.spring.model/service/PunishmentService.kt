@@ -12,6 +12,10 @@ class PunishmentService(
     val punishmentRepository: PunishmentRepository
 ) {
 
+    fun banModel(userId: Long, system: String): PunishmentEntity {
+        return punishmentRepository.findByUserIdAndSystem(userId, system).orElse(null)
+    }
+
     fun isBanned(userId: Long, system: String): Boolean {
         val entity = punishmentRepository.findByUserIdAndSystem(userId, system).orElse(null) ?: return false
         val time = entity.date?.time ?: 0

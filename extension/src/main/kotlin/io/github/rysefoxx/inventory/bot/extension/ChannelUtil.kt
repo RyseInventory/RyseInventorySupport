@@ -14,9 +14,10 @@ object ChannelUtil {
         channelId: String,
         jda: JDA,
         placeHolders: List<String>? = null,
-        embedId: String? = null
+        embedId: String? = null,
+        userId: Long? = null
     ) {
-        jda.getTextChannelById(channelId)?.sendMessageEmbeds(embed(key, embedId, placeHolders))?.queue()
+        jda.getTextChannelById(channelId)?.sendMessageEmbeds(embed(key, embedId, userId, placeHolders))?.queue()
     }
 
     fun embed(
@@ -24,15 +25,23 @@ object ChannelUtil {
         channelId: String,
         jda: JDA,
         placeHolders: List<String>? = null,
-        embedId: String? = null
+        embedId: String? = null,
+        userId: Long? = null
     ): MessageCreateAction? {
-        return jda.getTextChannelById(channelId)?.sendMessageEmbeds(embed(key, embedId, placeHolders))
+        return jda.getTextChannelById(channelId)?.sendMessageEmbeds(embed(key, embedId, userId, placeHolders))
     }
 
-    fun embed(key: String, embedId: String? = null, placeHolders: List<String>? = null): MessageEmbed {
+    fun embed(
+        key: String,
+        embedId: String? = null,
+        userId: Long? = null,
+        placeHolders: List<String>? = null
+    ): MessageEmbed {
+        println(userId == null)
         val languageDocument = Application.context.getBean(LanguageDocument::class.java) ?: return Embed()
         var configDescription =
-            languageDocument.getDefaultTranslationList("${key}_embed_description").joinToString("\n") { it }
+            userId?.let { languageDocument.getTranslation("${key}_embed_description", userId) }
+                ?: languageDocument.getDefaultTranslation("${key}_embed_description")
 
         if (placeHolders != null) {
             for (i in placeHolders.indices) {
@@ -43,7 +52,9 @@ object ChannelUtil {
         val finalKey = "$key${embedId?.let { "_$it" } ?: ""}"
 
         return Embed {
-            title = languageDocument.getDefaultTranslation("${key}_embed_title")
+            title =
+                userId?.let { languageDocument.getTranslation("${key}_embed_title", userId) }
+                    ?: languageDocument.getDefaultTranslation("${key}_embed_title")
             description = configDescription
             color = 0xA87406
             footer(finalKey)

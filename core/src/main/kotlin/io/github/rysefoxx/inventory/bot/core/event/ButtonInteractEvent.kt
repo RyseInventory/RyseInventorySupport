@@ -23,7 +23,7 @@ class ButtonInteractEvent(
         if (event.user.isBot)
             return
 
-        when (event.componentId.split("_")[1]) {
+        when (event.componentId) {
             StringConstants.EMBED_TRANSLATE_BUTTON -> {
                 val embed = event.message.embeds[0]
                 val keyArray = embed.footer?.text?.split("_") ?: return
