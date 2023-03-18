@@ -45,6 +45,7 @@ class TagsCommand(
     companion object {
         const val TAGS_CREATE = "create"
         const val TAGS_DELETE = "delete"
+        const val TAGS_INFO = "info"
 
         const val TAGS_OPTION_NAME = "tag-name"
 
@@ -191,7 +192,7 @@ class TagsCommand(
             },
             SubcommandData(TAGS_DELETE, "Deletes a tag").apply {
                 addOption(OptionType.STRING, TAGS_OPTION_NAME, "The tag name", true)
-            },
+            }
         )
     }
 }

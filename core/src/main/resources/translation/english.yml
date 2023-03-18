@@ -159,7 +159,7 @@ tags_embed_description:
   - ""
   - "> **Give the tag aliases (Optional)**"
   - "{2}"
-banned_embed_title: ":no_entry_sign: You are banned!"
+banned_embed_title: "<:pepeban:1083772052164579389> You are banned!"
 banned_embed_description:
   - "The interaction could not be executed."
   - ""

@@ -102,7 +102,7 @@ class PunishmentCommand(
                 .setEphemeral(true)
                 .queue()
 
-        val placeHolder = listOf(user.asMention, event.user.id, reason, system, time.toString())
+        val placeHolder = listOf(user.asMention, event.user.asMention, reason, system, time.toString())
 
         var embedData = EmbedDataEntity(data = placeHolder)
         embedData = embedDataService.saveData(embedData)

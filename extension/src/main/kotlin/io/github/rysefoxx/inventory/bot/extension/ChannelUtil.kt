@@ -37,7 +37,6 @@ object ChannelUtil {
         userId: Long? = null,
         placeHolders: List<String>? = null
     ): MessageEmbed {
-        println(userId == null)
         val languageDocument = Application.context.getBean(LanguageDocument::class.java) ?: return Embed()
         var configDescription =
             userId?.let { languageDocument.getTranslation("${key}_embed_description", userId) }

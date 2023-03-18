@@ -81,10 +81,10 @@ class LanguageDocument(
         return result
     }
 
-    fun getDefaultTranslation(key: String): String {
+    fun getDefaultTranslation(key: String, placeHolder: String? = null): String {
         return when (val translation = loadTranslations("english.yml")?.get(key)) {
-            is String -> translation
-            is List<*> -> translation.joinToString("\n") { it.toString() }
+            is String -> translation.replaceFirst("{0}", placeHolder ?: "{0}")
+            is List<*> -> translation.joinToString("\n") { it.toString().replaceFirst("{0}", placeHolder ?: "{0}") }
             else -> key
         }
     }

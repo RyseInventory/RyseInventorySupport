@@ -160,7 +160,7 @@ tags_embed_description:
   - "> **Dem Tag Aliases geben (Optional)**"
   - "{2}"
   - ""
-banned_embed_title: ":no_entry_sign: Du bist gebannt!"
+banned_embed_title: "<:pepeban:1083772052164579389> Du bist gebannt!"
 banned_embed_description:
   - "Die Interaktion konnte nicht ausgeführt werden."
   - ""

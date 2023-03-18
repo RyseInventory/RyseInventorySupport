@@ -7,4 +7,5 @@ interface OptionalRespondEvents {
     fun onAutoCompleteInteraction(event: CommandAutoCompleteInteractionEvent) {
 
     }
+
 }

@@ -1,17 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS data;
 
+CREATE TABLE IF NOT EXISTS data.tag_request
+(
+    id         BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    tag_entity TEXT                              NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS data.tag
 (
     name    VARCHAR(20) PRIMARY KEY NOT NULL,
     content TEXT                    NOT NULL,
     created VARCHAR(30)             NOT NULL,
     from_id BIGINT                  NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS data.tag_request
-(
-    id         BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    tag_entity TEXT                              NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS data.tag_alias
