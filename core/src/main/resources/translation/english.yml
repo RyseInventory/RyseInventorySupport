@@ -73,6 +73,8 @@ roles_select_menu_java_label: "Java"
 roles_select_menu_java_description: "Removes or adds the Java role."
 roles_select_menu_kotlin_label: "Kotlin"
 roles_select_menu_kotlin_description: "Removes or adds the Kotlin role."
+roles_select_menu_announcement_label: "Announcement"
+roles_select_menu_announcement_description: "Removes or adds the Announcement role."
 roles_embed_title: "<:java:1082796411948638328> Manage your roles <:kotlin:1082795811760508938>"
 roles_embed_description:
   - "Want to customize your roles the way you customize languages? No problem. Here you can remove or add all possible roles."

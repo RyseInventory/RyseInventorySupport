@@ -30,7 +30,7 @@ object StringConstants {
     const val SELECT_MENU_RULES_DISAGREE = "rules-disagree"
 
     const val SELECT_MENU_LANGUAGE = "language-selection"
-    const val SELECT_MENU_OPTION_LANGUAGE = "langugage-option-selection"
+    const val SELECT_MENU_OPTION_LANGUAGE = "language-option-selection"
     const val SELECT_MENU_LANGUAGE_ENGLISH = "language-english"
     const val SELECT_MENU_LANGUAGE_GERMAN = "language-german"
 
@@ -38,6 +38,7 @@ object StringConstants {
     const val SELECT_MENU_OPTION_ROLE = "role-option-selection"
     const val SELECT_MENU_ROLE_JAVA = "role-java"
     const val SELECT_MENU_ROLE_KOTLIN = "role-kotlin"
+    const val SELECT_MENU_ROLE_ANNOUNCEMENT = "role-announcement"
 
     const val EMBED_TRANSLATE_BUTTON = "translate-button"
 

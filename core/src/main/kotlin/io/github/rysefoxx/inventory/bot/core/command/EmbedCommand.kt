@@ -151,6 +151,12 @@ class EmbedCommand(
                 )
                     .withDescription(languageDocument.getDefaultTranslation("roles_select_menu_kotlin_description"))
                     .withEmoji(Emoji.fromFormatted("<:kotlin:1082795811760508938>")),
+                SelectOption.of(
+                    languageDocument.getDefaultTranslation("roles_select_menu_announcement_label"),
+                    StringConstants.SELECT_MENU_ROLE_ANNOUNCEMENT
+                )
+                    .withDescription(languageDocument.getDefaultTranslation("roles_select_menu_announcement_description"))
+                    .withEmoji(Emoji.fromFormatted("\uD83D\uDCF0")),
             )
         }
     }
